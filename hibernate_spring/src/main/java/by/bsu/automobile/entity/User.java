@@ -18,13 +18,14 @@ public class User implements Serializable {
 //    @SequenceGenerator(name = "user_gen_seq", sequenceName = "user_seq")
     private int id;
 
-    @Column(unique = true, nullable = false, length = 45)
+    @Column(unique = true, nullable = false, length = 45, name = "login")
     private String login;
 
-    @Column(nullable = false, length = 45)
+    @Column(nullable = false, length = 45, name = "password")
     private String password;
 
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, name = "role")
     private ROLE role;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
@@ -70,6 +71,14 @@ public class User implements Serializable {
     public void setRole(ROLE role) {
         this.role = role;
     }
+
+//    public String getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
 
     public UserData getUserData() {
         return userData;

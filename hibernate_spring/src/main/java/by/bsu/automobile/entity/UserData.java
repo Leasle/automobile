@@ -23,7 +23,7 @@ public class UserData {
     private String lastName;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "id_User")
     private User user;
 
     public int getId() {

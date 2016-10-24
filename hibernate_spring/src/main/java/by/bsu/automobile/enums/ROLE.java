@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Sergey on 21.10.2016.
  */
 public enum ROLE implements Serializable {
-    ADMIN("admin"), USER("user"), DEALER("dealer");
+    ADMIN("Admin"), CLIENT("Client"), DEALER("Dealer");
 
     private String roleType;
 
