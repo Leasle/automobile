@@ -5,6 +5,7 @@ import by.bsu.automobile.dao.EntityDAO;
 import by.bsu.automobile.entity.Auto;
 import by.bsu.automobile.entity.Dealer;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +19,13 @@ import java.util.List;
 @Transactional
 @Repository("dealerDao")
 public class DealerDaoImpl extends AbstractDAO<Dealer, Integer>  implements EntityDAO<Dealer> {
+    private static final String SELECT_BY_ID = "select * from dealer where id = :idEntity";
+    private static final String SELECT_ALL = "select * from dealer";
+
     public Dealer findById(int id) {
-        return getByKey(id);
+        Query query = getSession().createSQLQuery(SELECT_BY_ID).addEntity(Dealer.class).setParameter("idEntity", id);
+
+        return (Dealer) query.uniqueResult();
     }
 
     public void create(Dealer dealer) {
@@ -31,16 +37,15 @@ public class DealerDaoImpl extends AbstractDAO<Dealer, Integer>  implements Enti
     }
 
     public void remove(int id) {
-        Dealer dealer = getByKey(id);
+        Dealer dealer = findById(id);
         if (dealer != null) {
             delete(dealer);
         }
     }
 
     public List<Dealer> findAll() {
-        Criteria criteria = createEntityCriteria();
-//                .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        Query query = getSession().createSQLQuery(SELECT_ALL).addEntity(Dealer.class);
 
-        return (List<Dealer>) criteria.list();
+        return (List<Dealer>) query.list();
     }
 }

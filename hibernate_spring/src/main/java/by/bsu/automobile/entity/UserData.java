@@ -3,6 +3,7 @@ package by.bsu.automobile.entity;
 import by.bsu.automobile.entity.User;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Sergey on 21.10.2016.
@@ -10,7 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user_data")
-public class UserData {
+public class UserData implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @SequenceGenerator(name = "user_data_gen_seq", catalog = "user_seq")

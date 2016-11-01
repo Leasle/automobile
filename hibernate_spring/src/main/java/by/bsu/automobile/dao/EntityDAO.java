@@ -13,9 +13,9 @@ import java.util.List;
 public interface EntityDAO<T> {
     T findById(int id);
 
-    void create(T user);
+    void create(T entity);
 
-    void edit(T user);
+    void edit(T entity);
 
     void remove(int id);
 

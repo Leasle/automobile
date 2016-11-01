@@ -23,8 +23,8 @@ public class ShoppingCart implements Serializable {
     @Column(name = "date", nullable = false)
     private DateTime dateTime;
 
-    @OneToMany(mappedBy = "shoppingCart")
-    private Set<AutoDealer> automobiles;
+//    @OneToMany(mappedBy = "shoppingCart")
+//    private Set<AutoDealer> automobiles;
 
     public int getId() {
         return id;
@@ -56,15 +56,15 @@ public class ShoppingCart implements Serializable {
         }
     }
 
-    public Set<AutoDealer> getAutomobiles() {
-        return automobiles;
-    }
-
-    public void setAutomobiles(Set<AutoDealer> automobiles) {
-        if (automobiles != null) {
-            this.automobiles = automobiles;
-        }
-    }
+//    public Set<AutoDealer> getAutomobiles() {
+//        return automobiles;
+//    }
+//
+//    public void setAutomobiles(Set<AutoDealer> automobiles) {
+//        if (automobiles != null) {
+//            this.automobiles = automobiles;
+//        }
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -76,8 +76,8 @@ public class ShoppingCart implements Serializable {
         if (id != that.id) return false;
         if (!user.equals(that.user)) return false;
         if (!dateTime.equals(that.dateTime)) return false;
-        return automobiles.equals(that.automobiles);
-
+//        return automobiles.equals(that.automobiles);
+        return true;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class ShoppingCart implements Serializable {
         int result = id;
         result = 31 * result + user.hashCode();
         result = 31 * result + dateTime.hashCode();
-        result = 31 * result + automobiles.hashCode();
+//        result = 31 * result + automobiles.hashCode();
         return result;
     }
 
@@ -95,7 +95,7 @@ public class ShoppingCart implements Serializable {
                 "id=" + id +
                 ", user=" + user +
                 ", dateTime=" + dateTime +
-                ", automobiles=" + automobiles +
+//                ", automobiles=" + automobiles +
                 '}';
     }
 }

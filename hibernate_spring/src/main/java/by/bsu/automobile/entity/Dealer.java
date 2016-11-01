@@ -74,7 +74,6 @@ public class Dealer implements Serializable {
         if (!name.equals(dealer.name)) return false;
         if (address != null ? !address.equals(dealer.address) : dealer.address != null) return false;
         return autoDealer != null ? autoDealer.equals(dealer.autoDealer) : dealer.autoDealer == null;
-
     }
 
     @Override

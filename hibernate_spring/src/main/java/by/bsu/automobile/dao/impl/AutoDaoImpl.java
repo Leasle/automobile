@@ -5,6 +5,7 @@ import by.bsu.automobile.dao.EntityDAO;
 import by.bsu.automobile.entity.Auto;
 import by.bsu.automobile.entity.User;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +16,16 @@ import java.util.List;
  * Created by Sergey on 24.10.2016.
  */
 
-@Repository
+@Repository("autoDao")
 @Transactional
 public class AutoDaoImpl extends AbstractDAO<Auto, Integer> implements EntityDAO<Auto> {
+    private static final String SELECT_BY_ID = "select * from auto where id = :idEntity";
+    private static final String SELECT_ALL = "select * from auto";
+
     public Auto findById(int id) {
-        return getByKey(id);
+        Query query = getSession().createSQLQuery(SELECT_BY_ID).addEntity(Auto.class).setParameter("idEntity", id);
+
+        return (Auto) query.uniqueResult();
     }
 
     public void create(Auto auto) {
@@ -38,8 +44,8 @@ public class AutoDaoImpl extends AbstractDAO<Auto, Integer> implements EntityDAO
     }
 
     public List<Auto> findAll() {
-        Criteria criteria = createEntityCriteria().setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        Query query = getSession().createSQLQuery(SELECT_ALL).addEntity(Auto.class);
 
-        return (List<Auto>) criteria.list();
+        return (List<Auto>) query.list();
     }
 }

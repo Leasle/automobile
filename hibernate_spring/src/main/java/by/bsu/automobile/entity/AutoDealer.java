@@ -2,6 +2,8 @@ package by.bsu.automobile.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Sergey on 22.10.2016.
@@ -15,19 +17,19 @@ public class AutoDealer implements Serializable {
     private int id;
 
     @OneToOne
-    @JoinColumn(name = "id_auto")
+    @JoinColumn(name = "id_Auto")
     private Auto auto;
 
     @OneToOne
-    @JoinColumn(name = "id_dealer")
+    @JoinColumn(name = "id_Dealer")
     private Dealer dealer;
 
     @Column(name = "cost", nullable = false)
     private double cost;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "cart_auto_dealer", joinColumns = @JoinColumn(name = "id_auto_dealer"), inverseJoinColumns = @JoinColumn(name = "id_shopping_cart"))
-    private ShoppingCart shoppingCart;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "cart_auto_dealer", joinColumns = @JoinColumn(name = "id_Auto_Dealer"), inverseJoinColumns = @JoinColumn(name = "id_Shopping_Cart"))
+    private Set<ShoppingCart> shoppingCartSet = new HashSet<ShoppingCart>();
 
     public int getId() {
         return id;
@@ -69,14 +71,12 @@ public class AutoDealer implements Serializable {
         }
     }
 
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
+    public Set<ShoppingCart> getShoppingCartSet() {
+        return shoppingCartSet;
     }
 
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        if (shoppingCart != null) {
-            this.shoppingCart = shoppingCart;
-        }
+    public void setShoppingCartSet(Set<ShoppingCart> shoppingCartSet) {
+        this.shoppingCartSet = shoppingCartSet;
     }
 
     @Override
@@ -90,7 +90,7 @@ public class AutoDealer implements Serializable {
         if (Double.compare(that.cost, cost) != 0) return false;
         if (!auto.equals(that.auto)) return false;
         if (!dealer.equals(that.dealer)) return false;
-        return shoppingCart != null ? shoppingCart.equals(that.shoppingCart) : that.shoppingCart == null;
+        return shoppingCartSet != null ? shoppingCartSet.equals(that.shoppingCartSet) : that.shoppingCartSet == null;
 
     }
 
@@ -103,7 +103,7 @@ public class AutoDealer implements Serializable {
         result = 31 * result + dealer.hashCode();
         temp = Double.doubleToLongBits(cost);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (shoppingCart != null ? shoppingCart.hashCode() : 0);
+        result = 31 * result + (shoppingCartSet != null ? shoppingCartSet.hashCode() : 0);
         return result;
     }
 
@@ -114,7 +114,7 @@ public class AutoDealer implements Serializable {
                 ", auto=" + auto +
                 ", dealer=" + dealer +
                 ", cost=" + cost +
-                ", shoppingCart=" + shoppingCart +
+                ", shoppingCartSet=" + shoppingCartSet +
                 '}';
     }
 }

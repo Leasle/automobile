@@ -1,6 +1,8 @@
 package by.bsu.automobile.dao;
 
+import by.bsu.automobile.configuration.HibernateConfiguration;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ import java.lang.reflect.ParameterizedType;
 
 @Transactional
 @Repository
-public abstract class AbstractDAO<T, PK extends Serializable> {
+public abstract class AbstractDAO<T extends Serializable, PK extends Serializable> {
     private final Class<T> persistentClass;
 
     @SuppressWarnings("unchecked")
@@ -33,7 +35,7 @@ public abstract class AbstractDAO<T, PK extends Serializable> {
     }
 
     @SuppressWarnings("unchecked")
-    public T getByKey(PK key) {
+    public T getByKey(int key) {
         return (T) getSession().get(persistentClass, key);
     }
 
