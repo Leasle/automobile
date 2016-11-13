@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <dealer id="1" name="dealer1" address="address1"/>
+    <dealer id="2" name="dealer2" address="address2"/>
+    <dealer id="3" name="dealer3" address="address3"/>
+
+    <auto id="1" mark="mark1" model="model1" spec="spec1" year="2005-08-15 00:00:00"/>
+    <auto id="2" mark="mark2" model="model2" spec="spec2" year="2015-08-15 00:00:00"/>
+    <auto id="3" mark="mark3" model="model3" spec="spec3" year="2010-09-16 00:00:00"/>
+</dataset>
