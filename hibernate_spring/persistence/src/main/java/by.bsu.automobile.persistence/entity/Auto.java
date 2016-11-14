@@ -3,6 +3,8 @@ package by.bsu.automobile.persistence.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Sergey on 22.10.2016.
@@ -27,8 +29,8 @@ public class Auto implements Serializable {
     @Column(name = "year", nullable = false)
     private Date year;
 
-    @OneToOne(mappedBy = "auto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private AutoDealer autoDealer;
+    @OneToMany(mappedBy = "autoDealerPK.auto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<AutoDealer> autoDealers = new HashSet<AutoDealer>();
 
     public int getId() {
         return id;
@@ -74,14 +76,12 @@ public class Auto implements Serializable {
         }
     }
 
-    public AutoDealer getAutoDealer() {
-        return autoDealer;
+    public Set<AutoDealer> getAutoDealers() {
+        return autoDealers;
     }
 
-    public void setAutoDealer(AutoDealer autoDealer) {
-        if (autoDealer != null) {
-            this.autoDealer = autoDealer;
-        }
+    public void setAutoDealers(Set<AutoDealer> autoDealers) {
+        this.autoDealers = autoDealers;
     }
 
     @Override
@@ -96,8 +96,7 @@ public class Auto implements Serializable {
         if (!model.equals(auto.model)) return false;
         if (specification != null ? !specification.equals(auto.specification) : auto.specification != null)
             return false;
-        if (!year.equals(auto.year)) return false;
-        return autoDealer != null ? autoDealer.equals(auto.autoDealer) : auto.autoDealer == null;
+        return year.equals(auto.year);
 
     }
 
@@ -108,7 +107,6 @@ public class Auto implements Serializable {
         result = 31 * result + model.hashCode();
         result = 31 * result + (specification != null ? specification.hashCode() : 0);
         result = 31 * result + year.hashCode();
-        result = 31 * result + (autoDealer != null ? autoDealer.hashCode() : 0);
         return result;
     }
 
@@ -120,7 +118,6 @@ public class Auto implements Serializable {
                 ", model='" + model + '\'' +
                 ", specification='" + specification + '\'' +
                 ", year=" + year +
-                ", autoDealer=" + autoDealer +
                 '}';
     }
 }

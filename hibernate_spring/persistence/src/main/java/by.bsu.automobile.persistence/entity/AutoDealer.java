@@ -11,54 +11,47 @@ import java.util.Set;
 
 @Entity
 @Table(name = "auto_dealer")
+@AssociationOverrides({
+        @AssociationOverride(name = "autoDealerPK.auto",
+                joinColumns = @JoinColumn(name = "id_Auto")),
+        @AssociationOverride(name = "autoDealerPK.dealer",
+                joinColumns = @JoinColumn(name = "id_Dealer")) })
 public class AutoDealer implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @OneToOne
-    @JoinColumn(name = "id_Auto")
-    private Auto auto;
-
-    @OneToOne
-    @JoinColumn(name = "id_Dealer")
-    private Dealer dealer;
+    @EmbeddedId
+    private AutoDealerPK autoDealerPK = new AutoDealerPK();
 
     @Column(name = "cost", nullable = false)
     private double cost;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "cart_auto_dealer", joinColumns = @JoinColumn(name = "id_Auto_Dealer"), inverseJoinColumns = @JoinColumn(name = "id_Shopping_Cart"))
+    @JoinTable(name = "сart_auto_dealer", joinColumns = {@JoinColumn(name = "id_Auto_Auto_Dealer"),
+            @JoinColumn(name = "id_Dealer_Auto_Dealer")}, inverseJoinColumns = @JoinColumn(name = "id_Shopping_Сart"))
     private Set<ShoppingCart> shoppingCartSet = new HashSet<ShoppingCart>();
 
-    public int getId() {
-        return id;
+    public AutoDealerPK getAutoDealerPK() {
+        return autoDealerPK;
     }
 
-    public void setId(int id) {
-        if (id > 0) {
-            this.id = id;
-        }
+    public void setAutoDealerPK(AutoDealerPK autoDealerPK) {
+        this.autoDealerPK = autoDealerPK;
     }
 
+    @Transient
     public Auto getAuto() {
-        return auto;
+        return getAutoDealerPK().getAuto();
     }
 
     public void setAuto(Auto auto) {
-        if (auto != null) {
-            this.auto = auto;
-        }
+        getAutoDealerPK().setAuto(auto);
     }
 
+    @Transient
     public Dealer getDealer() {
-        return dealer;
+        return getAutoDealerPK().getDealer();
     }
 
     public void setDealer(Dealer dealer) {
-        if (dealer != null) {
-            this.dealer = dealer;
-        }
+        getAutoDealerPK().setDealer(dealer);
     }
 
     public double getCost() {
@@ -86,35 +79,29 @@ public class AutoDealer implements Serializable {
 
         AutoDealer that = (AutoDealer) o;
 
-        if (id != that.id) return false;
         if (Double.compare(that.cost, cost) != 0) return false;
-        if (!auto.equals(that.auto)) return false;
-        if (!dealer.equals(that.dealer)) return false;
-        return shoppingCartSet != null ? shoppingCartSet.equals(that.shoppingCartSet) : that.shoppingCartSet == null;
-
+        if (!autoDealerPK.equals(that.autoDealerPK)) return false;
+//        return shoppingCartSet != null ? shoppingCartSet.equals(that.shoppingCartSet) : that.shoppingCartSet == null;
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = id;
-        result = 31 * result + auto.hashCode();
-        result = 31 * result + dealer.hashCode();
+        result = autoDealerPK.hashCode();
         temp = Double.doubleToLongBits(cost);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (shoppingCartSet != null ? shoppingCartSet.hashCode() : 0);
+//        result = 31 * result + (shoppingCartSet != null ? shoppingCartSet.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "AutoDealer{" +
-                "id=" + id +
-                ", auto=" + auto +
-                ", dealer=" + dealer +
+                "autoDealerPK=" + autoDealerPK.toString() +
                 ", cost=" + cost +
-                ", shoppingCartSet=" + shoppingCartSet +
+//                ", shoppingCartSet=" + shoppingCartSet +
                 '}';
     }
 }

@@ -110,10 +110,7 @@ public class User implements Serializable {
         if (id != user.id) return false;
         if (!login.equals(user.login)) return false;
         if (!password.equals(user.password)) return false;
-        if (role != user.role) return false;
-        if (!userData.equals(user.userData)) return false;
-        return shoppingCarts != null ? shoppingCarts.equals(user.shoppingCarts) : user.shoppingCarts == null;
-
+        return role != user.role;
     }
 
     @Override
@@ -122,8 +119,6 @@ public class User implements Serializable {
         result = 31 * result + login.hashCode();
         result = 31 * result + password.hashCode();
         result = 31 * result + role.hashCode();
-        result = 31 * result + userData.hashCode();
-        result = 31 * result + (shoppingCarts != null ? shoppingCarts.hashCode() : 0);
         return result;
     }
 
@@ -134,8 +129,7 @@ public class User implements Serializable {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", userData=" + userData +
-                ", shoppingCarts=" + shoppingCarts +
+                ", userdata=" + userData +
                 '}';
     }
 }

@@ -46,13 +46,13 @@ public class AutoDaoTest {
         auto.setMark("audi");
         auto.setModel("a4");
         auto.setSpecification("spec");
-        auto.setYear(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+        auto.setYear(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 
         autoDAO.create(auto);
 
         Auto expectedAuto = (Auto) autoDAO.findById(auto.getId());
 
-        Assert.assertEquals(auto, expectedAuto);
+        Assert.assertTrue(auto.getId() == expectedAuto.getId());
     }
 
     @Test

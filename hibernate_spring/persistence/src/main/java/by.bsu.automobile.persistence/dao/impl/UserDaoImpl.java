@@ -34,7 +34,7 @@ public class UserDaoImpl extends AbstractDAO<User, Integer> implements EntityDAO
     }
 
     public void remove(int id) {
-        User user = getByKey(id);
+        User user = findById(id);
         if (user != null) {
             delete(user);
         }

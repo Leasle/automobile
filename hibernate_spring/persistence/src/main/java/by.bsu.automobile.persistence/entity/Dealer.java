@@ -2,6 +2,8 @@ package by.bsu.automobile.persistence.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Sergey on 22.10.2016.
@@ -20,8 +22,8 @@ public class Dealer implements Serializable {
     @Column(name = "address", length = 45)
     private String address;
 
-    @OneToOne(mappedBy = "dealer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private AutoDealer autoDealer;
+    @OneToMany(mappedBy = "autoDealerPK.dealer", cascade = CascadeType.ALL)
+    private Set<AutoDealer> autoDealers = new HashSet<AutoDealer>();
 
     public int getId() {
         return id;
@@ -53,14 +55,12 @@ public class Dealer implements Serializable {
         }
     }
 
-    public AutoDealer getAutoDealer() {
-        return autoDealer;
+    public Set<AutoDealer> getAutoDealers() {
+        return autoDealers;
     }
 
-    public void setAutoDealer(AutoDealer autoDealer) {
-        if (autoDealer != null) {
-            this.autoDealer = autoDealer;
-        }
+    public void setAutoDealers(Set<AutoDealer> autoDealers) {
+        this.autoDealers = autoDealers;
     }
 
     @Override
@@ -72,8 +72,7 @@ public class Dealer implements Serializable {
 
         if (id != dealer.id) return false;
         if (!name.equals(dealer.name)) return false;
-        if (address != null ? !address.equals(dealer.address) : dealer.address != null) return false;
-        return autoDealer != null ? autoDealer.equals(dealer.autoDealer) : dealer.autoDealer == null;
+        return address != null ? address.equals(dealer.address) : dealer.address == null;
     }
 
     @Override
@@ -81,7 +80,6 @@ public class Dealer implements Serializable {
         int result = id;
         result = 31 * result + name.hashCode();
         result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (autoDealer != null ? autoDealer.hashCode() : 0);
         return result;
     }
 
@@ -91,7 +89,6 @@ public class Dealer implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", autoDealer=" + autoDealer +
                 '}';
     }
 }

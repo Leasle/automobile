@@ -22,7 +22,7 @@ public class UserData implements Serializable {
     @Column(name = "last_name", nullable = false, length = 45)
     private String lastName;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_User")
     private User user;
 
@@ -75,9 +75,7 @@ public class UserData implements Serializable {
 
         if (id != userData.id) return false;
         if (!firstName.equals(userData.firstName)) return false;
-        if (!lastName.equals(userData.lastName)) return false;
-        return user.equals(userData.user);
-
+        return lastName.equals(userData.lastName);
     }
 
     @Override
@@ -85,7 +83,6 @@ public class UserData implements Serializable {
         int result = id;
         result = 31 * result + firstName.hashCode();
         result = 31 * result + lastName.hashCode();
-        result = 31 * result + user.hashCode();
         return result;
     }
 
@@ -95,7 +92,6 @@ public class UserData implements Serializable {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", user=" + user +
                 '}';
     }
 }
