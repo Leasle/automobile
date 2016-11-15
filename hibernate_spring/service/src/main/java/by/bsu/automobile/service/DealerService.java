@@ -1,6 +1,6 @@
 package by.bsu.automobile.service;
 
-import by.bsu.automobile.persistence.entity.Dealer;
+import by.bsu.automobile.dto.DealerDTO;
 
 import java.util.List;
 
@@ -8,13 +8,13 @@ import java.util.List;
  * Created by Sergey on 29.10.2016.
  */
 public interface DealerService {
-    void addDealer(Dealer dealer);
+    DealerDTO addDealer(DealerDTO dealerDTO);
 
-    Dealer findById(int id);
+    DealerDTO findDealerById(int id);
 
-    void updateDealer(Dealer dealer);
+    DealerDTO updateDealer(int id, DealerDTO dealerDTO);
 
     void deleteDealerById(int id);
 
-    List<Dealer> findAllDealers();
+    List<DealerDTO> findAllDealers();
 }
