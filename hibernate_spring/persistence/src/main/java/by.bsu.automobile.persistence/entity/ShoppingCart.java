@@ -3,8 +3,6 @@ package by.bsu.automobile.persistence.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +25,7 @@ public class ShoppingCart implements Serializable {
     @Column(name = "date", nullable = false)
     private Date dateTime;
 
-    @ManyToMany(mappedBy = "shoppingCartSet", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "shoppingCartSet", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<AutoDealer> autoDealers = new HashSet<AutoDealer>();
 
     public int getId() {

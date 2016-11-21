@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="defaultTemplate" template="/WEB-INF/view/template/template.jsp">
+        <put-attribute name="title" value="Automobile"/>
+		<put-attribute name="header" value="/WEB-INF/view/template/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/view/template/menu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/template/body.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/template/footer.jsp" />
+        <put-attribute name="content" value=""/>
+	</definition>
+
+    <definition name="dealers" extends="defaultTemplate">
+        <put-attribute name="title" value="Dealers"/>
+        <put-attribute name="content" value="/WEB-INF/view/body/dealer/dealers.jsp"/>
+    </definition>
+    <definition name="registration_dealer" extends="defaultTemplate">
+        <put-attribute name="title" value="Dealer registration"/>
+        <put-attribute name="content" value="/WEB-INF/view/body/dealer/registration_dealer.jsp"/>
+    </definition>
+
+</tiles-definitions>

@@ -110,7 +110,7 @@ public class User implements Serializable {
         if (id != user.id) return false;
         if (!login.equals(user.login)) return false;
         if (!password.equals(user.password)) return false;
-        return role != user.role;
+        return role == user.role;
     }
 
     @Override

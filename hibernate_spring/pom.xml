@@ -21,6 +21,8 @@
         <mysql.connector.version>5.1.31</mysql.connector.version>
         <joda-time.version>2.3</joda-time.version>
         <junit.version>4.12</junit.version>
+        <apache-commons.version>1.4</apache-commons.version>
+        <apache-commons-lang.version>2.5</apache-commons-lang.version>
         <javax.servlet.version>3.1.0</javax.servlet.version>
         <javax.servlet.jsp.version>2.3.1</javax.servlet.jsp.version>
         <jstl.version>1.2</jstl.version>
@@ -30,6 +32,8 @@
         <slf4j.version>1.7.21</slf4j.version>
         <commons-logging.version>1.1.1</commons-logging.version>
         <apache-log4j.version>1.2.17</apache-log4j.version>
+        <apache-tiles.version>3.0.7</apache-tiles.version>
+        <aspect-j.version>1.8.8</aspect-j.version>
         <db-unit.version>2.5.1</db-unit.version>
         <spring-db-unit.version>1.2.1</spring-db-unit.version>
         <mockito.version>2.0.2-beta</mockito.version>
@@ -109,6 +113,23 @@
                 <version>${mysql.connector.version}</version>
             </dependency>
 
+            <!-- Apache commons -->
+            <dependency>
+                <groupId>commons-dbcp</groupId>
+                <artifactId>commons-dbcp</artifactId>
+                <version>${apache-commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${apache-commons-lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons-logging.version}</version>
+            </dependency>
+
             <!-- Joda-Time -->
             <dependency>
                 <groupId>joda-time</groupId>
@@ -146,6 +167,30 @@
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
                 <version>${mockito.version}</version>
+            </dependency>
+
+            <!-- AspectJ -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspect-j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspect-j.version}</version>
+            </dependency>
+
+            <!-- Apache tiles -->
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-extras</artifactId>
+                <version>${apache-tiles.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-jsp</artifactId>
+                <version>${apache-tiles.version}</version>
             </dependency>
 
             <!-- Javax -->
@@ -209,4 +254,16 @@
             <!--</dependency>-->
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
