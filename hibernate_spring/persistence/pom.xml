@@ -4,14 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>automobile</artifactId>
-        <groupId>com.bsu</groupId>
+        <groupId>by.bsu</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>by.bsu.automobile.persistence</groupId>
     <artifactId>common-persistence</artifactId>
-    <packaging>war</packaging>
+
+    <!--<packaging>war</packaging>-->
 
     <dependencies>
 
@@ -41,6 +42,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- Spring framework -->

@@ -29,7 +29,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="application" target="1.8" />
-      <module name="hibernate_spring" target="1.5" />
+      <module name="hibernate_spring" target="1.8" />
       <module name="persistence" target="1.8" />
       <module name="service" target="1.8" />
     </bytecodeTargetLevel>

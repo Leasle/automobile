@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.bsu</groupId>
+    <groupId>by.bsu</groupId>
     <artifactId>automobile</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -13,6 +13,17 @@
         <module>service</module>
         <module>application</module>
     </modules>
+
+    <repositories>
+        <repository>
+            <id>MySQL</id>
+            <url>https://mvnrepository.com/artifact/mysql/mysql-connector-java</url>
+        </repository>
+        <repository>
+            <id>log4j-over-slf4j</id>
+            <url>https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j</url>
+        </repository>
+    </repositories>
 
     <properties>
         <application.version>1.0-SNAPSHOT</application.version>
@@ -111,6 +122,7 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.connector.version}</version>
+                <scope>runtime</scope>
             </dependency>
 
             <!-- Apache commons -->
@@ -198,6 +210,7 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${javax.servlet.version}</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>javax.servlet.jsp</groupId>
@@ -246,6 +259,23 @@
                 <version>${apache-log4j.version}</version>
             </dependency>
 
+            <!--&lt;!&ndash; Jtalks &ndash;&gt;-->
+            <!--<dependency>-->
+                <!--<groupId>org.jtalks.poulpe</groupId>-->
+                <!--<artifactId>poulpe-model</artifactId>-->
+                <!--<version>${project.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.jtalks.poulpe</groupId>-->
+                <!--<artifactId>poulpe-service</artifactId>-->
+                <!--<version>${project.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.jtalks.poulpe</groupId>-->
+                <!--<artifactId>poulpe-web-controller</artifactId>-->
+                <!--<version>${project.version}</version>-->
+            <!--</dependency>-->
+
             <!-- To map JodaTime with database type -->
             <!--<dependency>-->
                 <!--<groupId>org.jadira.usertype</groupId>-->
@@ -259,11 +289,30 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <!--<configuration>-->
+                    <!--<failOnMissingWebXml>false</failOnMissingWebXml>-->
+                <!--</configuration>-->
                 <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
+                <version>2.5</version>
             </plugin>
         </plugins>
     </build>
+
+    <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-release-plugin</artifactId>-->
+        <!--<configuration>-->
+            <!--<autoVersionSubmodules>true</autoVersionSubmodules>-->
+        <!--</configuration>-->
+    <!--</plugin>-->
+
+    <!--<scm>-->
+        <!--<connection>scm:git:git@github.com:jtalks-org/poulpe.git</connection>-->
+        <!--<developerConnection>scm:git:git@github.com:jtalks-org/poulpe.git</developerConnection>-->
+        <!--<url>scm:git:git@github.com:jtalks-org/poulpe.git</url>-->
+    <!--</scm>-->
 </project>

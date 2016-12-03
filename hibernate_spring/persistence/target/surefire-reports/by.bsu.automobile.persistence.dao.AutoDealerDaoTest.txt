@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: by.bsu.automobile.persistence.dao.AutoDealerDaoTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.956 sec
